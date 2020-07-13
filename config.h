@@ -37,14 +37,6 @@ static const char *colors[][3]      = {
 #define MAX_TAGLEN 16			/* altogether */
 static char tags[][MAX_TAGLEN] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-/* launcher commands (They must be NULL terminated) */
-static const char* chromium[]      = { "chromium", NULL };
-
-static const Launcher launchers[] = {
-       /* command       name to display */
-	{ chromium,         "chromium" },
-};
-
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -89,6 +81,8 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("chromium --proxy-server=127.0.0.1:8889") },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("chromium") },
 	{ MODKEY,                       XK_apostrophe,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
