@@ -17,8 +17,8 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
 static const int user_bh            = 25;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int viewontag          = 1;     /* Switch view on tag switch */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char font[]            = "monospace 15";
+static const char dmenufont[]       = "monospace:size=15";
 static const char col_normbg[]      = "#222222";
 static const char col_normborder[]  = "#444444";
 static const char col_normfg[]      = "#bbbbbb";
