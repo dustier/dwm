@@ -44,6 +44,7 @@ static const Rule rules[] = {
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
 	{ NULL,      NULL,     "st",           0,         0,          1,           0,        -1 },
+	{ "netease-cloud-music", NULL, NULL,   1 << 8,    0,          0,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
 
@@ -76,13 +77,19 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *browserproxycmd[] = { "chromium",  "--proxy-server=127.0.0.1:8889", NULL };
+static const char *browsercmd[] = { "chromium", NULL };
+static const char *zealcmd[] = { "zeal", NULL };
+static const char *neteasecmd[] = { "netease-cloud-music", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("chromium --proxy-server=127.0.0.1:8889") },
-	{ MODKEY|ShiftMask,             XK_w,      spawn,          SHCMD("chromium") },
+	{ MODKEY,                       XK_w,      spawn,          {.v = browserproxycmd } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = browsercmd } },
+	{ MODKEY,                       XK_z,      spawn,          {.v = zealcmd } },
+	{ MODKEY,                       XK_m,      spawn,          {.v = neteasecmd } },
 	{ MODKEY,                       XK_apostrophe,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
@@ -99,7 +106,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      killunsel,      {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	/* { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },
