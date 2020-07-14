@@ -82,6 +82,7 @@ static const char *browsercmd[] = { "chromium", NULL };
 static const char *zealcmd[] = { "zeal", NULL };
 static const char *neteasecmd[] = { "netease-cloud-music", NULL };
 
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
@@ -105,6 +106,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_Left,   shiftview,      {.i = -1 } },
 	{ MODKEY,                       XK_Right,  shiftview,      {.i = +1 } },
+
+    /* volume control */
+    { 0,             XF86XK_AudioMute,         spawn,       SHCMD("pamixer -t") },
+    { 0,             XF86XK_AudioLowerVolume,  spawn,       SHCMD("pamixer -d 3") },
+    { 0,             XF86XK_AudioRaiseVolume,  spawn,       SHCMD("pamixer -i 3") },
 
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killunsel,      {0} },
