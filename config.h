@@ -108,9 +108,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Right,  shiftview,      {.i = +1 } },
 
     /* volume control */
-    { 0,             XF86XK_AudioMute,         spawn,       SHCMD("pamixer -t") },
-    { 0,             XF86XK_AudioLowerVolume,  spawn,       SHCMD("pamixer -d 3") },
-    { 0,             XF86XK_AudioRaiseVolume,  spawn,       SHCMD("pamixer -i 3") },
+    { 0,             XF86XK_AudioMute,         spawn,       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
+    { 0,             XF86XK_AudioLowerVolume,  spawn,       SHCMD("pamixer -d 3; kill -44 $(pidof dwmblocks)") },
+    { 0,             XF86XK_AudioRaiseVolume,  spawn,       SHCMD("pamixer -i 3; kill -44 $(pidof dwmblocks)") },
 
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killunsel,      {0} },
