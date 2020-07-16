@@ -77,8 +77,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *browserproxycmd[] = { "chromium",  "--proxy-server=127.0.0.1:8889", NULL };
-static const char *browsercmd[] = { "chromium", NULL };
+static const char *browserproxycmd[] = { "brave",  "--proxy-server=127.0.0.1:8889", NULL };
+static const char *browsercmd[] = { "brave", NULL };
 static const char *zealcmd[] = { "zeal", NULL };
 static const char *neteasecmd[] = { "netease-cloud-music", NULL };
 
