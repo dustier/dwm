@@ -81,7 +81,7 @@ static const char *browserproxycmd[] = { "brave",  "--proxy-server=127.0.0.1:888
 static const char *browsercmd[] = { "brave", NULL };
 static const char *zealcmd[] = { "zeal", NULL };
 static const char *neteasecmd[] = { "netease-cloud-music", NULL };
-static const char *screenlockcmd[] = { "slock", NULL };
+static const char *sysactcmd[] = { "sysact.bash", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
@@ -92,7 +92,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_z,      spawn,          {.v = zealcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = neteasecmd } },
-	{ MODKEY,                    XK_BackSpace, spawn,          {.v = screenlockcmd } },
+	{ MODKEY,                    XK_BackSpace, spawn,          {.v = sysactcmd } },
 	{ MODKEY,                       XK_apostrophe,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
