@@ -15,9 +15,11 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const int user_bh            = 25;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
+static const int user_bh            = 0;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const int viewontag          = 1;     /* Switch view on tag switch */
-static const char font[]            = "monospace 15";
+/* static const char font[]            = "monospace 15"; */
+/* static const char font[]            = "Fira Code Nerd Font 15"; */
+static const char font[]            = "Sauce Code Pro Nerd Font 15";
 static const char dmenufont[]       = "monospace:size=15";
 static const char col_normbg[]      = "#222222";
 static const char col_normborder[]  = "#444444";
@@ -43,7 +45,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class     instance  title           tags mask  isfloating  isterminal  noswallow  monitor */
-	{ NULL,      NULL,     "st",           0,         0,          1,           0,        -1 },
+	{ NULL,      NULL,     "Alacritty",           0,         0,          1,           0,        -1 },
 	{ "netease-cloud-music", NULL, NULL,   1 << 8,    0,          0,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
 };
@@ -72,27 +74,28 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_normbg, "-nf", col_normfg, "-sb", col_selbg, "-sf", col_selfg, NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *roficmd[] = { "rofi", "-show", "drun", NULL};
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-static const char *browserproxycmd[] = { "brave",  "--proxy-server=127.0.0.1:8889", NULL };
-static const char *browsercmd[] = { "brave", NULL };
+static const char *scratchpadcmd[] = { "alacritty", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *browserproxycmd[] = { "chromium",  "--proxy-server=127.0.0.1:8889", NULL };
+static const char *browsercmd[] = { "chromium", NULL };
 static const char *zealcmd[] = { "zeal", NULL };
 static const char *neteasecmd[] = { "netease-cloud-music", NULL };
-static const char *sysactcmd[] = { "sysact.bash", NULL };
+static const char *sysactcmd[] = { "rofi", "-show", "p", "-modi", "p:powermenu.bash", "-width", "20", "-lines", "6", NULL };
+static const char *screenlockcmd[] = { "slock", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_w,      spawn,          {.v = browserproxycmd } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_z,      spawn,          {.v = zealcmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = neteasecmd } },
 	{ MODKEY,                    XK_BackSpace, spawn,          {.v = sysactcmd } },
+	{ MODKEY,                    XK_l,       spawn,          {.v = screenlockcmd } },
 	{ MODKEY,                       XK_apostrophe,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
@@ -101,13 +104,14 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_o,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_o,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ Mod1Mask,                     XK_h,      setmfact,       {.f = -0.05} },
+	{ Mod1Mask,                     XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
     /* tag view */
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_Left,   shiftview,      {.i = -1 } },
 	{ MODKEY,                       XK_Right,  shiftview,      {.i = +1 } },
+
 
     /* volume control */
     { 0,             XF86XK_AudioMute,         spawn,       SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
