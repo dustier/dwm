@@ -82,8 +82,8 @@ static const char *browserproxycmd[] = { "chromium",  "--proxy-server=127.0.0.1:
 static const char *browsercmd[] = { "chromium", NULL };
 static const char *zealcmd[] = { "zeal", NULL };
 static const char *neteasecmd[] = { "netease-cloud-music", NULL };
-static const char *sysactcmd[] = { "rofi", "-show", "p", "-modi", "p:powermenu.bash", "-width", "20", "-lines", "6", NULL };
-static const char *screenlockcmd[] = { "slock", NULL };
+static const char *sysactcmd[] = { "rofi", "-show", "p", "-modi", "p:powermenu.sh", "-width", "20", "-lines", "6", NULL };
+static const char *screenlockcmd[] = { "i3lock", NULL };
 
 #include <X11/XF86keysym.h>
 static Key keys[] = {
